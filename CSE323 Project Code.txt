@@ -1,0 +1,69 @@
+# define mABlack  A0
+#define  mARed  A1
+#define mBOrange  A2
+#define  mBYellow  A3
+#define  mASpeed  A4
+#define  mBSpeed  A5
+int state = 0;
+void setup()
+ {
+ pinMode(mABlack, OUTPUT);
+ digitalWrite(mABlack, LOW);
+ pinMode(mARed, OUTPUT);
+ digitalWrite(mARed, LOW);
+ pinMode(mBOrange, OUTPUT);
+ digitalWrite(mBOrange, LOW);
+ pinMode(mBYellow, OUTPUT);
+ digitalWrite(mBYellow, LOW);
+ pinMode(mASpeed, 0);
+ digitalWrite(mBSpeed, 0);
+Serial.begin(9600); // Default communication rate of the Bluetooth module
+}
+void loop() 
+{
+ if(Serial.available() > 0){ // Checks whether data is comming from the serial port
+ state = Serial.read(); // Reads the data from the serial port
+ }
+ switch(state) 
+{
+ case '0' :
+              digitalWrite(mABlack , HIGH);
+              digitalWrite(mARed , LOW);
+              digitalWrite(mBOrange , HIGH); // 1010
+              digitalWrite(mBYellow , LOW);
+              analogWrite(mASpeed, 255);
+              analogWrite(mBSpeed, 255);
+              break;
+   case '1' : 
+              digitalWrite(mABlack , LOW);
+              digitalWrite(mARed , HIGH);
+              digitalWrite(mBOrange , LOW);
+              digitalWrite(mBYellow , HIGH); // 0101
+              analogWrite(mASpeed, 255);
+              analogWrite(mBSpeed, 255);
+              break;
+  case '2' :
+              digitalWrite(mABlack , LOW);
+              digitalWrite(mARed , HIGH);
+              digitalWrite(mBOrange , LOW); // 0010
+              digitalWrite(mBYellow , LOW);
+              analogWrite(mASpeed,255);
+              analogWrite(mBSpeed, 255);
+              break;
+  case '3' : 
+              digitalWrite(mABlack , LOW);
+              digitalWrite(mARed , LOW);
+              digitalWrite(mBOrange , LOW);
+              digitalWrite(mBYellow , LOW); //0000
+              analogWrite(mASpeed, 255);
+              analogWrite(mBSpeed, 255);
+              break;
+
+  case '4' :
+              digitalWrite(mABlack , LOW);
+              digitalWrite(mARed , LOW);
+              digitalWrite(mBOrange , HIGH); // 0010
+              digitalWrite(mBYellow , LOW);
+              analogWrite(mASpeed,255);
+              analogWrite(mBSpeed, 255);
+              break; }}
